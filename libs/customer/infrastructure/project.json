@@ -1,0 +1,24 @@
+{
+  "name": "customer-infrastructure",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/customer/infrastructure/src",
+  "projectType": "library",
+  "tags": [
+    "scope:customer",
+    "type:infrastructure"
+  ],
+  "targets": {
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "jest --config libs/customer/infrastructure/jest.config.js --passWithNoTests"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "eslint libs/customer/infrastructure/src"
+      }
+    }
+  }
+}

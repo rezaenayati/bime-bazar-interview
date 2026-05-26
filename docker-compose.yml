@@ -1,0 +1,45 @@
+services:
+    postgres:
+        image: postgres:16-alpine
+        container_name: bime-bazar-postgres
+        environment:
+            POSTGRES_USER: bime
+            POSTGRES_PASSWORD: bime
+            POSTGRES_DB: bime_bazar
+        ports:
+            # Host port 5434 to avoid clashing with other local Postgres instances.
+            # Inside the docker network the api still connects on 5432.
+            - '5434:5432'
+        volumes:
+            - bime_bazar_pg:/var/lib/postgresql/data
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -U bime -d bime_bazar']
+            interval: 5s
+            timeout: 5s
+            retries: 5
+
+    api:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: bime-bazar-api
+        environment:
+            NODE_ENV: production
+            PORT: 3000
+            DATABASE_HOST: postgres
+            DATABASE_PORT: 5432
+            DATABASE_USER: bime
+            DATABASE_PASSWORD: bime
+            DATABASE_NAME: bime_bazar
+            PAYMENT_PROVIDER_CHAIN: wallet,stripe,paypal
+            STRIPE_FAILURE_RATE: '0.2'
+            PAYPAL_FAILURE_RATE: '0.2'
+        ports:
+            - '3000:3000'
+        depends_on:
+            postgres:
+                condition: service_healthy
+        profiles: ['app']
+
+volumes:
+    bime_bazar_pg:

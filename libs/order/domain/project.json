@@ -1,0 +1,24 @@
+{
+  "name": "order-domain",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/order/domain/src",
+  "projectType": "library",
+  "tags": [
+    "scope:order",
+    "type:domain"
+  ],
+  "targets": {
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "jest --config libs/order/domain/jest.config.js --passWithNoTests"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "eslint libs/order/domain/src"
+      }
+    }
+  }
+}

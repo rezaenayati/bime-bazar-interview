@@ -1,0 +1,38 @@
+{
+  "name": "api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/api/src",
+  "projectType": "application",
+  "tags": ["scope:app", "type:api"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/apps/api"],
+      "options": {
+        "command": "tsc -p apps/api/tsconfig.app.json"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node -r ts-node/register -r tsconfig-paths/register apps/api/src/main.ts",
+        "env": {
+          "TS_NODE_PROJECT": "apps/api/tsconfig.app.json",
+          "TS_NODE_TRANSPILE_ONLY": "true"
+        }
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "jest --config apps/api/jest.config.js --passWithNoTests"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "eslint apps/api/src"
+      }
+    }
+  }
+}

@@ -1,0 +1,205 @@
+{
+    "info": {
+        "name": "Bime Bazar API",
+        "_postman_id": "9b9b0a48-bime-bazar-mini-ecom",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": "One request per API endpoint. Set collection variables before use: `baseUrl`, `apiKey`, and optionally `customerId`, `productId`, `orderId`, `paymentId` for path parameters."
+    },
+    "auth": {
+        "type": "apikey",
+        "apikey": [
+            { "key": "key", "value": "X-Api-Key", "type": "string" },
+            { "key": "value", "value": "{{apiKey}}", "type": "string" },
+            { "key": "in", "value": "header", "type": "string" }
+        ]
+    },
+    "variable": [
+        { "key": "baseUrl", "value": "http://localhost:3000" },
+        { "key": "apiKey", "value": "dev-api-key" },
+        { "key": "customerId", "value": "" },
+        { "key": "productId", "value": "" },
+        { "key": "orderId", "value": "" },
+        { "key": "paymentId", "value": "" }
+    ],
+    "item": [
+        {
+            "name": "Customers",
+            "item": [
+                {
+                    "name": "Create customer",
+                    "request": {
+                        "method": "POST",
+                        "header": [{ "key": "Content-Type", "value": "application/json" }],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"alice@example.com\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/customers",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["customers"]
+                        }
+                    }
+                },
+                {
+                    "name": "Get customer",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/customers/{{customerId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["customers", "{{customerId}}"]
+                        }
+                    }
+                },
+                {
+                    "name": "Top up wallet",
+                    "request": {
+                        "method": "POST",
+                        "header": [{ "key": "Content-Type", "value": "application/json" }],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"amountCents\": 5000\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/customers/{{customerId}}/wallet/top-up",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["customers", "{{customerId}}", "wallet", "top-up"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Products",
+            "item": [
+                {
+                    "name": "Create product",
+                    "request": {
+                        "method": "POST",
+                        "header": [{ "key": "Content-Type", "value": "application/json" }],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Widget\",\n    \"priceCents\": 2500\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/products",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["products"]
+                        }
+                    }
+                },
+                {
+                    "name": "List products",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/products",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["products"]
+                        }
+                    }
+                },
+                {
+                    "name": "Get product",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/products/{{productId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["products", "{{productId}}"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Orders",
+            "item": [
+                {
+                    "name": "Create order",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" },
+                            { "key": "X-Customer-Id", "value": "{{customerId}}" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"items\": [\n        { \"productId\": \"{{productId}}\", \"quantity\": 2 }\n    ]\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/orders",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["orders"]
+                        }
+                    }
+                },
+                {
+                    "name": "List orders",
+                    "request": {
+                        "method": "GET",
+                        "header": [{ "key": "X-Customer-Id", "value": "{{customerId}}" }],
+                        "url": {
+                            "raw": "{{baseUrl}}/orders",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["orders"]
+                        }
+                    }
+                },
+                {
+                    "name": "Get order",
+                    "request": {
+                        "method": "GET",
+                        "header": [{ "key": "X-Customer-Id", "value": "{{customerId}}" }],
+                        "url": {
+                            "raw": "{{baseUrl}}/orders/{{orderId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["orders", "{{orderId}}"]
+                        }
+                    }
+                },
+                {
+                    "name": "Pay order",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" },
+                            { "key": "X-Customer-Id", "value": "{{customerId}}" },
+                            { "key": "Idempotency-Key", "value": "{{$randomUUID}}" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"allocations\": [\n        { \"amountCents\": 5000 }\n    ]\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/orders/{{orderId}}/pay",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["orders", "{{orderId}}", "pay"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Payments",
+            "item": [
+                {
+                    "name": "Get payment",
+                    "request": {
+                        "method": "GET",
+                        "header": [{ "key": "X-Customer-Id", "value": "{{customerId}}" }],
+                        "url": {
+                            "raw": "{{baseUrl}}/payments/{{paymentId}}",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["payments", "{{paymentId}}"]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

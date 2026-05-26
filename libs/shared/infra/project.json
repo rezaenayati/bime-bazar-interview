@@ -1,0 +1,24 @@
+{
+  "name": "shared-infra",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/infra/src",
+  "projectType": "library",
+  "tags": [
+    "scope:shared",
+    "type:infra"
+  ],
+  "targets": {
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "jest --config libs/shared/infra/jest.config.js --passWithNoTests"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "eslint libs/shared/infra/src"
+      }
+    }
+  }
+}

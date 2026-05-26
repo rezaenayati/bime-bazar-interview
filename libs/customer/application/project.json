@@ -1,0 +1,24 @@
+{
+  "name": "customer-application",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/customer/application/src",
+  "projectType": "library",
+  "tags": [
+    "scope:customer",
+    "type:application"
+  ],
+  "targets": {
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "jest --config libs/customer/application/jest.config.js --passWithNoTests"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "eslint libs/customer/application/src"
+      }
+    }
+  }
+}

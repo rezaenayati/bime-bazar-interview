@@ -1,0 +1,24 @@
+{
+  "name": "payment-application",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/payment/application/src",
+  "projectType": "library",
+  "tags": [
+    "scope:payment",
+    "type:application"
+  ],
+  "targets": {
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "jest --config libs/payment/application/jest.config.js --passWithNoTests"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "eslint libs/payment/application/src"
+      }
+    }
+  }
+}

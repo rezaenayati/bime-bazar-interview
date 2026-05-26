@@ -1,0 +1,11 @@
+node_modules
+dist
+tmp
+coverage
+.nx
+*.log
+.env
+.env.local
+.DS_Store
+.idea
+.vscode

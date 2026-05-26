@@ -1,0 +1,15 @@
+export { LoggerModule } from './lib/logger.module';
+export { ApiKeyGuard } from './lib/api-key.guard';
+export { Public } from './lib/public.decorator';
+export { CustomerIdGuard } from './lib/customer-id.guard';
+export { CurrentCustomer } from './lib/current-customer.decorator';
+export { DomainExceptionFilter } from './lib/domain-exception.filter';
+export { DomainEventPublisher } from './lib/domain-event-publisher';
+export { TransactionRunner, currentTxManager } from './lib/transaction-runner';
+export { OutboxModule } from './lib/outbox/outbox.module';
+export { OutboxStore } from './lib/outbox/outbox.store';
+export { OutboxRelay } from './lib/outbox/outbox.relay';
+export { OutboxOrmEntity } from './lib/outbox/outbox.orm-entity';
+export { DomainEventRegistry } from './lib/outbox/domain-event-registry';
+export type { DomainEventDescriptor } from './lib/outbox/domain-event-registry';
+export { SharedInfraModule } from './lib/shared-infra.module';

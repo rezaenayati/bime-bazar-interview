@@ -1,0 +1,24 @@
+{
+  "name": "payment-infrastructure",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/payment/infrastructure/src",
+  "projectType": "library",
+  "tags": [
+    "scope:payment",
+    "type:infrastructure"
+  ],
+  "targets": {
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "jest --config libs/payment/infrastructure/jest.config.js --passWithNoTests"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "eslint libs/payment/infrastructure/src"
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "commonjs",
+    "lib": ["ES2022"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": false,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@bime-bazar/shared/kernel": ["libs/shared/kernel/src/index.ts"],
+      "@bime-bazar/shared/infra": ["libs/shared/infra/src/index.ts"],
+      "@bime-bazar/customer/domain": ["libs/customer/domain/src/index.ts"],
+      "@bime-bazar/customer/application": ["libs/customer/application/src/index.ts"],
+      "@bime-bazar/customer/infrastructure": ["libs/customer/infrastructure/src/index.ts"],
+      "@bime-bazar/product/domain": ["libs/product/domain/src/index.ts"],
+      "@bime-bazar/product/application": ["libs/product/application/src/index.ts"],
+      "@bime-bazar/product/infrastructure": ["libs/product/infrastructure/src/index.ts"],
+      "@bime-bazar/order/domain": ["libs/order/domain/src/index.ts"],
+      "@bime-bazar/order/application": ["libs/order/application/src/index.ts"],
+      "@bime-bazar/order/infrastructure": ["libs/order/infrastructure/src/index.ts"],
+      "@bime-bazar/payment/domain": ["libs/payment/domain/src/index.ts"],
+      "@bime-bazar/payment/application": ["libs/payment/application/src/index.ts"],
+      "@bime-bazar/payment/infrastructure": ["libs/payment/infrastructure/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp", "dist"]
+}
